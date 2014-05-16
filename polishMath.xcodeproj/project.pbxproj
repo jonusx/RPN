@@ -21,6 +21,8 @@
 		24935BB6192568A5006FE2FB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24935B98192568A4006FE2FB /* UIKit.framework */; };
 		24935BBE192568A5006FE2FB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 24935BBC192568A5006FE2FB /* InfoPlist.strings */; };
 		24935BC0192568A5006FE2FB /* polishMathTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 24935BBF192568A5006FE2FB /* polishMathTests.m */; };
+		24935BCB19256903006FE2FB /* MRCPolishCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 24935BCA19256903006FE2FB /* MRCPolishCalculator.m */; };
+		24935BCC19256903006FE2FB /* MRCPolishCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 24935BCA19256903006FE2FB /* MRCPolishCalculator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		24935BBB192568A5006FE2FB /* polishMathTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "polishMathTests-Info.plist"; sourceTree = "<group>"; };
 		24935BBD192568A5006FE2FB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		24935BBF192568A5006FE2FB /* polishMathTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = polishMathTests.m; sourceTree = "<group>"; };
+		24935BC919256903006FE2FB /* MRCPolishCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRCPolishCalculator.h; sourceTree = "<group>"; };
+		24935BCA19256903006FE2FB /* MRCPolishCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRCPolishCalculator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +121,8 @@
 				24935BA6192568A5006FE2FB /* Main.storyboard */,
 				24935BA9192568A5006FE2FB /* MRCViewController.h */,
 				24935BAA192568A5006FE2FB /* MRCViewController.m */,
+				24935BC919256903006FE2FB /* MRCPolishCalculator.h */,
+				24935BCA19256903006FE2FB /* MRCPolishCalculator.m */,
 				24935BAC192568A5006FE2FB /* Images.xcassets */,
 				24935B9B192568A4006FE2FB /* Supporting Files */,
 			);
@@ -253,6 +259,7 @@
 				24935BA1192568A4006FE2FB /* main.m in Sources */,
 				24935BA5192568A5006FE2FB /* MRCAppDelegate.m in Sources */,
 				24935BAB192568A5006FE2FB /* MRCViewController.m in Sources */,
+				24935BCB19256903006FE2FB /* MRCPolishCalculator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				24935BC0192568A5006FE2FB /* polishMathTests.m in Sources */,
+				24935BCC19256903006FE2FB /* MRCPolishCalculator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
