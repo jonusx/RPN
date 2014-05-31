@@ -26,6 +26,9 @@
     }
     
     self.answers = [NSArray arrayWithArray:results];
+    
+    
+    NSLog(@"Infix result %@", [MRCPolishCalculator calculateInfix:@"50*(10-(5+6))+(60*(10-2))"]);
 }
 
 - (NSString *)stringResultFromString:(NSString *)string {

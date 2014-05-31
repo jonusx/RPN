@@ -13,6 +13,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+//    NSCharacterSet *delimiters = [NSCharacterSet characterSetWithCharactersInString:@"()"];
+//    NSArray *splitString = [@"50*(10-(5+6)) + (60*(10-2))" componentsSeparatedByCharactersInSet:delimiters];
+//    NSLog(@"%@", splitString);
+    
     return YES;
 }
 							

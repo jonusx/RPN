@@ -10,4 +10,5 @@
 
 @interface MRCPolishCalculator : NSObject
 + (NSNumber *)calculateFromString:(NSString *)stringForCalculation error:(NSError * __autoreleasing *)error;
++ (NSNumber *)calculateInfix:(NSString *)string;
 @end

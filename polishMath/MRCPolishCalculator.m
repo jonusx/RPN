@@ -13,13 +13,23 @@ typedef NS_ENUM(NSInteger, MRCOperator) {
     MRCOperatorAddition = 0,
     MRCOperatorSubtraction,
     MRCOperatorMultiplication,
-    MRCOperatorDivision
+    MRCOperatorDivision,
+    MRCOperatorOpenParan = 100,
+    MRCOperatorCloseParen
 };
+
+@interface MRCPolishNode : NSObject
+@property (nonatomic, strong) MRCPolishNode *rightNode;
+@property (nonatomic, strong) MRCPolishNode *leftNode;
+@property (nonatomic, strong) NSString *value;
+@end
 
 @interface MRCPolishCalculator ()
 @property (nonatomic, strong) NSMutableArray *numberResultsStack;
 @end
 
+@implementation MRCPolishNode
+@end
 
 @implementation MRCPolishCalculator
 
@@ -80,7 +90,7 @@ typedef NS_ENUM(NSInteger, MRCOperator) {
 
 
 - (MRCOperator)operatorFromString:(NSString *)string {
-    if ([string length] > 1) {
+    if (!string || [string length] > 1) {
         return MRCOperatorNotOperator;
     }
     const char *stringAsChar = [string cStringUsingEncoding:[NSString defaultCStringEncoding]];
@@ -96,6 +106,12 @@ typedef NS_ENUM(NSInteger, MRCOperator) {
             break;
         case '*':
             return MRCOperatorMultiplication;
+            break;
+        case '(':
+            return MRCOperatorOpenParan;
+            break;
+        case ')':
+            return MRCOperatorCloseParen;
             break;
         default:
             break;
@@ -135,6 +151,63 @@ typedef NS_ENUM(NSInteger, MRCOperator) {
     id value = [self.numberResultsStack lastObject];
     [self.numberResultsStack removeLastObject];
     return value;
+}
+
++ (NSNumber *)calculateInfix:(NSString *)string {
+    MRCPolishCalculator *calculator = [MRCPolishCalculator new];
+    NSArray *stackify = [[calculator convertInfixToRPN:string] componentsSeparatedByString:@" "];
+    return [calculator calculate:stackify error:nil];
+}
+
+- (NSString *)convertInfixToRPN:(NSString *)string {
+    string = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSMutableArray *operatorStack = [NSMutableArray new];
+    NSMutableString *numberString = [NSMutableString string];
+    BOOL __block lastWasOperator = NO;
+    //    @"50*(10-(5+6)) + (60*(10-2))"
+    [string enumerateSubstringsInRange:NSMakeRange(0, [string length]) options:NSStringEnumerationByComposedCharacterSequences usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+        
+        
+        MRCOperator operator = [self operatorFromString:substring];
+        if (operator == MRCOperatorNotOperator) {
+            //operand, write to string
+            if (lastWasOperator == YES) {
+                [numberString appendString:@" "];
+            }
+            [numberString appendString:substring];
+            lastWasOperator = NO;
+        }
+        else
+        {
+            
+            //check precedence. if higher, put on stack else write top stack value to string
+            MRCOperator topStackOperator = [self operatorFromString:[operatorStack lastObject]];
+            
+            //operator is lower than current stack start popping
+            while ((operator == MRCOperatorCloseParen && topStackOperator != MRCOperatorOpenParan) || (topStackOperator != MRCOperatorNotOperator && (operator == MRCOperatorAddition || operator == MRCOperatorSubtraction) && (topStackOperator == MRCOperatorMultiplication || topStackOperator == MRCOperatorDivision))) {
+                
+                [numberString appendString:@" "];
+                [numberString appendString:[operatorStack lastObject]];
+                [operatorStack removeLastObject];
+                topStackOperator = [self operatorFromString:[operatorStack lastObject]];
+                if (topStackOperator == MRCOperatorOpenParan && operator == MRCOperatorCloseParen) {
+                    [operatorStack removeLastObject];
+                }
+            }
+            //Put operator on stack
+            if (operator != MRCOperatorCloseParen) {
+                [operatorStack addObject:substring];
+            }
+            lastWasOperator = YES;
+        }
+    }];
+    
+    while ([operatorStack count] != 0) {
+        [numberString appendString:@" "];
+        [numberString appendString:[operatorStack lastObject]];
+        [operatorStack removeLastObject];
+    }
+    return numberString;
 }
 
 @end
